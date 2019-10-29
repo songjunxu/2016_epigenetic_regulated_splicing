@@ -1,0 +1,24 @@
+#!/bin/bash
+#BSUB -P Elizabeth_Heller_ShenDataset_Qiwen_2016_8
+#BSUB -J get_sra
+#BSUB -o /project/ibilab/projects/Elizabeth_Heller_ShenDataset_Qiwen_2016_8/large_data/raw_data/log/get_sra.out
+#BSUB -e /project/ibilab/projects/Elizabeth_Heller_ShenDataset_Qiwen_2016_8/large_data/raw_data/log/get_sra.error
+#BSUB -q normal
+
+#fastq-dump SRR629716 -Z > H3K36me3_coc1.fastq
+#fastq-dump SRR629717 -Z > H3K36me3_coc2.fastq
+fastq-dump SRR629718 -Z > H3K36me3_coc3.fastq
+
+fastq-dump SRR629719 -Z > H3K36me3_sal1.fastq
+fastq-dump SRR629720 -Z > H3K36me3_sal2.fastq
+fastq-dump SRR629721 -Z > H3K36me3_sal3.fastq
+
+
+fastq-dump SRR631150 -Z > input2.fastq
+fastq-dump SRR631151 -Z > input3.fastq
+fastq-dump SRR631152 -Z > input4.fastq
+
+cat input2.fastq input3.fastq input4.fastq > input.fastq
+
+for i in `ls *fastq`; do gzip $i; done
+

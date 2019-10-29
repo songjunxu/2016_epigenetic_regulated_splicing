@@ -1,0 +1,30 @@
+#!/bin/bash
+#BSUB -P Elizabeth_Heller_ShenDataset_Qiwen_2016_8
+#BSUB -J deeptools
+#BSUB -o /project/ibilab/projects/Elizabeth_Heller_ShenDataset_Qiwen_2016_8/large_data/deeptools/log/deeptools.out
+#BSUB -e /project/ibilab/projects/Elizabeth_Heller_ShenDataset_Qiwen_2016_8/large_data/deeptools/log/deeptools.error
+#BSUB -q normal
+#BSUB -n 8,32
+#BSUB -M 64400
+
+source /etc/profile.d/modules.sh
+module load samtools-0.1.19 FastQC-0.11.2 Trimmomatic-0.32 bowtie2-2.1.0 tophat-2.0.11 STAR-2.3.0e picard-1.96
+
+cd /project/ibilab/projects/Elizabeth_Heller_ShenDataset_Qiwen_2016_8/large_data/deeptools
+
+computeMatrix scale-regions -p $LSB_DJOB_NUMPROC -S ../bed/H3K36me3_coc-input.bigWig ../bed/H3K36me3_sal-input.bigWig -R ../exons/cluster8.bed ../exons/cluster8.promoter.bed ../exons/cluster8.variant.bed ../exons/cluster8.altDonor.bed ../exons/cluster8.canonical.bed ../exons/cluster8.altAcceptor.bed ../exons/cluster8.polyA.bed --binSize 5 --beforeRegionStartLength 3000  --regionBodyLength 3000 --afterRegionStartLength 3000 --startLabel "Acceptor" --endLabel "Donor" --missingDataAsZero --skipZeros -o cluster8.mat.gz
+plotHeatmap -m cluster8.mat.gz -out cluster8.png --startLabel "Acceptor" --endLabel "Donor" --xAxisLabel " " --legendLocation none --alpha 0.5 --perGroup
+plotHeatmap -m cluster8.mat.gz -out cluster8.v2.png --startLabel "Acceptor" --endLabel "Donor" --xAxisLabel " " --legendLocation none --alpha 0.5
+
+computeMatrix scale-regions -p $LSB_DJOB_NUMPROC -S ../bed/H3K36me3_coc-input.bigWig ../bed/H3K36me3_sal-input.bigWig -R ../exons/cluster14.bed ../exons/cluster14.promoter.bed ../exons/cluster14.variant.bed ../exons/cluster14.altDonor.bed ../exons/cluster14.canonical.bed ../exons/cluster14.altAcceptor.bed ../exons/cluster14.polyA.bed --binSize 5 --beforeRegionStartLength 3000  --regionBodyLength 3000 --afterRegionStartLength 3000 --startLabel "Acceptor" --endLabel "Donor" --missingDataAsZero --skipZeros -o cluster14.mat.gz
+plotHeatmap -m cluster14.mat.gz -out cluster14.png --startLabel "Acceptor" --endLabel "Donor" --xAxisLabel " " --legendLocation none --alpha 0.5 --perGroup
+plotHeatmap -m cluster14.mat.gz -out cluster14.v2.png --startLabel "Acceptor" --endLabel "Donor" --xAxisLabel " " --legendLocation none --alpha 0.5
+
+computeMatrix scale-regions -p $LSB_DJOB_NUMPROC -S ../bed/H3K36me3_coc-input.bigWig ../bed/H3K36me3_sal-input.bigWig -R ../exons/cluster19.bed ../exons/cluster19.promoter.bed ../exons/cluster19.variant.bed ../exons/cluster19.altDonor.bed ../exons/cluster19.canonical.bed ../exons/cluster19.altAcceptor.bed ../exons/cluster19.polyA.bed --binSize 5 --beforeRegionStartLength 3000  --regionBodyLength 3000 --afterRegionStartLength 3000 --startLabel "Acceptor" --endLabel "Donor" --missingDataAsZero --skipZeros -o cluster19.mat.gz
+plotHeatmap -m cluster19.mat.gz -out cluster19.png --startLabel "Acceptor" --endLabel "Donor" --xAxisLabel " " --legendLocation none --alpha 0.5 --perGroup
+plotHeatmap -m cluster19.mat.gz -out cluster19.v2.png --startLabel "Acceptor" --endLabel "Donor" --xAxisLabel " " --legendLocation none --alpha 0.5
+
+plotHeatmap -m cluster19.mat.gz -out legend.png --startLabel "Acceptor" --endLabel "Donor" --xAxisLabel " " --legendLocation best --alpha 0.5 --perGroup
+plotHeatmap -m cluster19.mat.gz -out legend.v2.png --startLabel "Acceptor" --endLabel "Donor" --xAxisLabel " " --legendLocation best --alpha 0.5
+
+
