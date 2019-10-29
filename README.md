@@ -15,4 +15,4 @@
 5. **Other Information**
   - [Data management](data/README.md) : data management details
   - [Documents](document/README.md) : project related documents.
-  - [Gitlab summary](Gitlab.summary.md) : brief instructions to use Gitlab commands.
+ 
